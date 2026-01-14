@@ -143,7 +143,7 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
                         <p className={`text-base md:text-xl font-black leading-snug mb-6 tracking-tight italic ${
                           darkMode ? 'text-gray-100' : 'text-slate-800'
                         }`}>
-                          "{review.text}"
+                          {review.text}
                         </p>
 
                         <div className="flex flex-col items-center">

@@ -41,8 +41,8 @@ export default function VishwakarmaCompleteWebsite() {
     { icon: <Phone size={20} />, label: 'Phone', value: '+91 98987 40255', color: 'text-blue-600' },
     { icon: <MessageCircle size={20} />, label: 'WhatsApp', value: '+91 98987 40255', color: 'text-green-600' },
     { icon: <MapPin size={20} />, label: 'Address', value: 'Shop No.10, Harikrishna Residency, Tulshidham, Zadeshwar Road, Bharuch, Gujarat' },
-    { icon: <Clock size={20} />, label: 'Working Hours', value: '9:00 AM - 10:00 PM (Daily)' },
-    { icon: <Star size={20} />, label: 'Google Rating', value: '4.5/5 stars (4 reviews)' },
+    { icon: <Clock size={20} />, label: 'Working Hours', value: '9:00 AM - 9:00 PM (Daily)' },
+    { icon: <Star size={20} />, label: 'Google Rating', value: '4.5/5 stars' },
     { icon: <Hammer size={20} />, label: 'Services', value: 'Industrial & Non Industrial Grill, Gate, Staircase, Roof Shade' },
   ];
 
