@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 
 interface HeaderProps {
@@ -10,7 +11,13 @@ interface HeaderProps {
 }
 
 const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: HeaderProps) => {
-  const navItems = ['Home', 'About', 'Services', 'Testimonials', 'Contact'];
+  const navItems = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Gallery', href: '/gallery' },
+    { label: 'Contact', href: '/contact' },
+  ];
 
   return (
     <>
@@ -49,13 +56,13 @@ const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: He
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8 text-sm font-medium">
               {navItems.map((item) => (
-                <a 
-                  key={item} 
-                  href={`#${item.toLowerCase()}`} 
+                <Link
+                  key={item.label}
+                  href={item.href}
                   className={`transition-colors hover:text-orange-500 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                 >
-                  {item}
-                </a>
+                  {item.label}
+                </Link>
               ))}
             </nav>
 
@@ -91,14 +98,14 @@ const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: He
         <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[500px] border-t border-gray-200 dark:border-gray-800' : 'max-h-0'}`}>
           <div className={`px-6 pt-4 pb-8 space-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
             {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+              <Link
+                key={item.label}
+                href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="block px-4 py-3 text-lg font-semibold rounded-xl hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 transition-colors"
               >
-                {item}
-              </a>
+                {item.label}
+              </Link>
             ))}
             <div className="pt-6">
               <a 
