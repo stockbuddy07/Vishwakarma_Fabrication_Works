@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { 
   Building2, 
   ChevronRight, 
@@ -31,7 +32,7 @@ const Services = ({ darkMode }: ServicesProps) => {
       title: 'Grill & Gate Work', 
       icon: <ShieldCheck size={28}/>, 
       desc: 'Premium security solutions including decorative window grills and automated main gates designed for safety.', 
-      img: "/images/gate.png" 
+      img: "/images/gate.jpg" 
     },
     { 
       title: 'Staircase Work', 
@@ -54,7 +55,7 @@ const Services = ({ darkMode }: ServicesProps) => {
           <span className="bg-blue-100 text-blue-600 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest">
             Our Expertise
           </span>
-          <h2 className="text-4xl md:text-5xl font-black mt-6">Services</h2>
+          <h2 className="text-4xl md:text-5xl font-black mt-6">Our Services</h2>
           <p className="opacity-60 mt-4 max-w-2xl mx-auto">
             Providing high-quality metal fabrication and structural engineering for industrial, commercial, and residential projects.
           </p>
@@ -72,10 +73,14 @@ const Services = ({ darkMode }: ServicesProps) => {
             >
               {/* Image Container */}
               <div className="h-44 overflow-hidden relative">
-                <img 
+                <Image 
                   src={service.img} 
+                  width={400}
+                  height={176}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                   alt={service.title}
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>

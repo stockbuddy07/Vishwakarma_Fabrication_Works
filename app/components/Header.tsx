@@ -70,23 +70,25 @@ const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: He
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => setDarkMode(!darkMode)} 
-                className="p-2 rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-3 min-w-[44px] min-h-[44px] rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-center"
                 aria-label="Toggle Dark Mode"
               >
-                {darkMode ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} />}
+                {darkMode ? <Sun size={20} className="text-yellow-400" aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
               </button>
               
               <button 
-                className="lg:hidden p-2" 
+                className="lg:hidden p-3 min-w-[44px] min-h-[44px] flex items-center justify-center" 
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle Menu"
+                aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
+                aria-expanded={mobileMenuOpen}
               >
-                {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                {mobileMenuOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
               </button>
 
               <a 
                 href="tel:+919898740255" 
-                className="hidden sm:block bg-orange-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-orange-700 transition-all shadow-lg hover:shadow-orange-500/40"
+                className="hidden sm:block bg-orange-600 text-white px-6 py-3 min-h-[44px] rounded-full font-bold text-sm hover:bg-orange-700 transition-all shadow-lg hover:shadow-orange-500/40 flex items-center justify-center"
+                aria-label="Call us at +91 98987 40255"
               >
                 Call Now
               </a>
@@ -110,7 +112,8 @@ const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: He
             <div className="pt-6">
               <a 
                 href="tel:+919898740255" 
-                className="flex items-center justify-center gap-2 w-full bg-orange-600 text-white py-4 rounded-2xl font-bold text-lg shadow-xl"
+                className="flex items-center justify-center gap-2 w-full bg-orange-600 text-white py-4 min-h-[44px] rounded-2xl font-bold text-lg shadow-xl"
+                aria-label="Call us at +91 98987 40255"
               >
                 Call Now
               </a>

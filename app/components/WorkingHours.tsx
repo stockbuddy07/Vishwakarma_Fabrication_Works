@@ -71,11 +71,21 @@ const WorkingHours = ({ darkMode }: WorkingHoursProps) => {
                 </div>
 
                 <div className="grid grid-cols-1 gap-2 pt-2">
-                  <a href={businessInfo.phoneLink} className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 rounded-xl text-xs font-bold">
-                    <Phone size={14}/> Call
+                  <a 
+                    href={businessInfo.phoneLink} 
+                    aria-label="Call us at +91 98987 40255"
+                    className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 min-h-[44px] rounded-xl text-xs font-bold"
+                  >
+                    <Phone size={14} aria-hidden="true"/> <span>Call</span>
                   </a>
-                  <a href={businessInfo.whatsappLink} className="flex items-center justify-center bg-green-500 text-white py-3 rounded-xl text-xs font-bold gap-2">
-                    <MessageCircle size={14}/> WhatsApp Chat
+                  <a 
+                    href={businessInfo.whatsappLink} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Contact us on WhatsApp"
+                    className="flex items-center justify-center bg-green-500 text-white py-3 min-h-[44px] rounded-xl text-xs font-bold gap-2"
+                  >
+                    <MessageCircle size={14} aria-hidden="true"/> <span>WhatsApp Chat</span>
                   </a>
                 </div>
               </div>
@@ -121,11 +131,21 @@ const WorkingHours = ({ darkMode }: WorkingHoursProps) => {
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <a href={businessInfo.phoneLink} className={`flex-1 flex items-center justify-center gap-3 py-5 rounded-2xl font-bold text-lg shadow-lg transition-transform hover:-translate-y-1 ${darkMode ? 'bg-white text-gray-900' : 'bg-gray-900 text-white'}`}>
-                    <Phone size={20}/> Call
+                  <a 
+                    href={businessInfo.phoneLink} 
+                    aria-label="Call us at +91 98987 40255"
+                    className={`flex-1 flex items-center justify-center gap-3 py-5 min-h-[44px] rounded-2xl font-bold text-lg shadow-lg transition-transform hover:-translate-y-1 ${darkMode ? 'bg-white text-gray-900' : 'bg-gray-900 text-white'}`}
+                  >
+                    <Phone size={20} aria-hidden="true"/> <span>Call</span>
                   </a>
-                  <a href={businessInfo.whatsappLink} className="flex-1 flex items-center justify-center gap-3 bg-green-500 text-white py-5 rounded-2xl font-bold text-lg shadow-lg transition-transform hover:-translate-y-1">
-                    <MessageCircle size={20}/> WhatsApp Chat
+                  <a 
+                    href={businessInfo.whatsappLink} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Contact us on WhatsApp"
+                    className="flex-1 flex items-center justify-center gap-3 bg-green-500 text-white py-5 min-h-[44px] rounded-2xl font-bold text-lg shadow-lg transition-transform hover:-translate-y-1"
+                  >
+                    <MessageCircle size={20} aria-hidden="true"/> <span>WhatsApp Chat</span>
                   </a>
                 </div>
               </div>

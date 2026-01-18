@@ -1,15 +1,25 @@
-import { Phone, MessageCircle, MapPin } from 'lucide-react';
+import { Phone, MessageCircle, MapPin, Clock, Star, Hammer } from 'lucide-react';
 import { ReactNode } from 'react';
 
 interface ContactProps {
   darkMode: boolean;
   contactDetails: {
-    icon: ReactNode;
+    icon: string | ReactNode;
     label: string;
     value: string;
     color?: string;
   }[];
 }
+
+// Icon mapping
+const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  Phone,
+  MessageCircle,
+  MapPin,
+  Clock,
+  Star,
+  Hammer,
+};
 
 const Contact = ({ darkMode, contactDetails }: ContactProps) => {
   // Exact Google Maps link for directions to your shop
@@ -32,10 +42,13 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
           <div className="space-y-6">
             <h3 className="text-xl font-black">Contact Information</h3>
             <div className="space-y-4">
-              {contactDetails.map((item, i) => (
+              {contactDetails.map((item, i) => {
+                const IconComponent = typeof item.icon === 'string' ? iconMap[item.icon] : null;
+                
+                return (
                 <div key={i} className="flex items-start gap-4 group">
                   <div className="bg-blue-600 text-white p-2.5 rounded-xl shadow-md shrink-0 transition-transform group-hover:scale-105">
-                    <div className="scale-90">{item.icon}</div>
+                    {IconComponent ? <IconComponent size={20} className="scale-90" /> : <div className="scale-90">{item.icon}</div>}
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase opacity-50 tracking-widest">{item.label}</p>
@@ -44,14 +57,16 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
                     </p>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
             
            <div className="flex flex-col sm:flex-row gap-3 pt-4">
   {/* Call Now Button */}
   <a 
     href="tel:+919898740255"
-    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-black text-base shadow-lg transition-all active:scale-95 text-center"
+    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 min-h-[44px] rounded-xl font-black text-base shadow-lg transition-all active:scale-95 text-center flex items-center justify-center"
+    aria-label="Call us at +91 98987 40255"
   >
     Call Now
   </a>
@@ -61,7 +76,8 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
     href="https://wa.me/919898740255?text=Hi, I'm interested in your fabrication services."
     target="_blank"
     rel="noopener noreferrer"
-    className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-black text-base shadow-lg transition-all active:scale-95 text-center"
+    className="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 min-h-[44px] rounded-xl font-black text-base shadow-lg transition-all active:scale-95 text-center flex items-center justify-center"
+    aria-label="Contact us on WhatsApp"
   >
     WhatsApp
   </a>
@@ -91,7 +107,7 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
                     <div className="bg-blue-100 text-blue-600 p-2 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
                       <MapPin size={20}/>
                     </div>
-                    <h4 className="font-black text-lg group-hover:text-blue-600 transition-colors">Vishwakarma Fabrication Works</h4>
+                    <span className="font-black text-lg group-hover:text-blue-600 transition-colors">Vishwakarma Fabrication Works</span>
                  </a>
                  
                  <p className="text-sm opacity-70 leading-relaxed mb-5">

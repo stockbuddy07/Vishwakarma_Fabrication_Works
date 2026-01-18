@@ -33,7 +33,9 @@ const Hero = ({ darkMode }: HeroProps) => {
               width={600} 
               height={300} 
               priority 
+              quality={85}
               className="max-w-full max-h-[40vh] md:max-h-[45vh] w-auto h-auto block object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 600px"
             />
           </div>
         </div>
@@ -58,11 +60,21 @@ const Hero = ({ darkMode }: HeroProps) => {
 
           {/* COMPACT BUTTONS */}
           <div className="flex flex-row gap-3 w-full max-w-md">
-            <a href="tel:+919898740255" className="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-blue-600 text-white hover:scale-[1.02] transition-transform shadow-lg">
-              <Phone size={18} /> Call
+            <a 
+              href="tel:+919898740255" 
+              className="flex-1 flex items-center justify-center gap-2 py-4 min-h-[44px] rounded-xl font-bold bg-blue-600 text-white hover:scale-[1.02] transition-transform shadow-lg"
+              aria-label="Call us at +91 98987 40255"
+            >
+              <Phone size={18} aria-hidden="true" /> <span>Call</span>
             </a>
-            <a href="https://wa.me/919898740255" className="flex-1 flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-green-500 text-white hover:scale-[1.02] transition-transform shadow-lg">
-              <MessageCircle size={18} /> WhatsApp
+            <a 
+              href="https://wa.me/919898740255" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 py-4 min-h-[44px] rounded-xl font-bold bg-green-500 text-white hover:scale-[1.02] transition-transform shadow-lg"
+              aria-label="Contact us on WhatsApp"
+            >
+              <MessageCircle size={18} aria-hidden="true" /> <span>WhatsApp</span>
             </a>
           </div>
         </div>

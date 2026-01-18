@@ -36,8 +36,23 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
 
   useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(nextSlide, SLIDE_DURATION);
-    return () => clearInterval(timer);
+    // Use requestAnimationFrame for better performance
+    let frameId: number;
+    let startTime = Date.now();
+    
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= SLIDE_DURATION) {
+        nextSlide();
+        startTime = Date.now();
+      }
+      frameId = requestAnimationFrame(animate);
+    };
+    
+    frameId = requestAnimationFrame(animate);
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+    };
   }, [isPaused, nextSlide]);
 
   const pauseTemporarily = () => {
@@ -79,12 +94,20 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
           onTouchEnd={handleTouchEnd}
         >
           {/* Compact Navigation Buttons */}
-          <button onClick={() => { prevSlide(); pauseTemporarily(); }} className="absolute -left-2 md:-left-12 top-1/2 -translate-y-1/2 z-50 p-2.5 rounded-lg bg-white/90 backdrop-blur shadow-lg text-slate-900 hover:bg-blue-600 hover:text-white transition-all transform active:scale-75 border border-slate-100">
-            <ChevronLeft size={18} strokeWidth={3} />
+          <button 
+            onClick={() => { prevSlide(); pauseTemporarily(); }} 
+            aria-label="Previous testimonial"
+            className="absolute -left-2 md:-left-12 top-1/2 -translate-y-1/2 z-50 p-3 min-w-[44px] min-h-[44px] rounded-lg bg-white/90 backdrop-blur shadow-lg text-slate-900 hover:bg-blue-600 hover:text-white transition-all transform active:scale-75 border border-slate-100 flex items-center justify-center"
+          >
+            <ChevronLeft size={18} strokeWidth={3} aria-hidden="true" />
           </button>
           
-          <button onClick={() => { nextSlide(); pauseTemporarily(); }} className="absolute -right-2 md:-right-12 top-1/2 -translate-y-1/2 z-50 p-2.5 rounded-lg bg-white/90 backdrop-blur shadow-lg text-slate-900 hover:bg-blue-600 hover:text-white transition-all transform active:scale-75 border border-slate-100">
-            <ChevronRight size={18} strokeWidth={3} />
+          <button 
+            onClick={() => { nextSlide(); pauseTemporarily(); }} 
+            aria-label="Next testimonial"
+            className="absolute -right-2 md:-right-12 top-1/2 -translate-y-1/2 z-50 p-3 min-w-[44px] min-h-[44px] rounded-lg bg-white/90 backdrop-blur shadow-lg text-slate-900 hover:bg-blue-600 hover:text-white transition-all transform active:scale-75 border border-slate-100 flex items-center justify-center"
+          >
+            <ChevronRight size={18} strokeWidth={3} aria-hidden="true" />
           </button>
 
           {/* Optimized Card: Reduced max-width for better vertical flow on all devices */}
@@ -162,17 +185,22 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center items-center gap-2.5 mt-8">
+          <div className="flex justify-center items-center gap-2.5 mt-8" role="tablist" aria-label="Testimonial navigation">
             {reviews.map((_, i) => (
               <button
                 key={i}
                 onClick={() => { setActiveIndex(i); pauseTemporarily(); }}
-                className={`transition-all duration-500 rounded-full h-1.5 ${
+                aria-label={`Go to testimonial ${i + 1}`}
+                aria-selected={i === activeIndex}
+                role="tab"
+                className={`transition-all duration-500 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center ${
                   i === activeIndex 
                     ? 'bg-blue-600 w-8 md:w-10 shadow-lg shadow-blue-500/50' 
                     : 'bg-slate-300 w-1.5'
                 }`}
-              />
+              >
+                <span className="sr-only">Testimonial {i + 1}</span>
+              </button>
             ))}
           </div>
         </div>

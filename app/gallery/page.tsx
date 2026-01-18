@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -44,38 +45,58 @@ export default function GalleryPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="rounded-3xl overflow-hidden shadow-lg">
-                <img
+                <Image
                   src="/images/factory.jpeg"
                   alt="Industrial Fabrication"
+                  width={400}
+                  height={224}
                   className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="rounded-3xl overflow-hidden shadow-lg">
-                <img
+                <Image
                   src="/images/julo.jpeg"
                   alt="Julo (Swing) Work"
+                  width={400}
+                  height={224}
                   className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="rounded-3xl overflow-hidden shadow-lg">
-                <img
-                  src="/images/gate.png"
+                <Image
+                  src="/images/gate.jpg"
                   alt="Gate Fabrication"
+                  width={400}
+                  height={224}
                   className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="rounded-3xl overflow-hidden shadow-lg">
-                <img
+                <Image
                   src="/images/stairs.jpeg"
                   alt="Staircase Fabrication"
+                  width={400}
+                  height={224}
                   className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="rounded-3xl overflow-hidden shadow-lg">
-                <img
+                <Image
                   src="/images/shad.jpeg"
                   alt="Roof Shade"
+                  width={400}
+                  height={224}
                   className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
               <div className="rounded-3xl overflow-hidden shadow-lg flex items-center justify-center bg-gradient-to-tr from-orange-500 to-blue-600 text-white">

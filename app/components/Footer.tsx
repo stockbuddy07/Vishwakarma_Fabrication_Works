@@ -62,19 +62,43 @@ const Footer = ({ darkMode }: FooterProps) => {
 
             {/* Social Icons with "Glass" effect */}
             <div className="flex gap-3">
-              {[Phone, MessageCircle, MapPin].map((Icon, idx) => (
-                <a
-                  key={idx}
-                  href="#"
-                  className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
-                    darkMode
-                      ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
-                      : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
-                  }`}
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
+              <a
+                href="tel:+919898740255"
+                aria-label="Call us"
+                className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
+                  darkMode
+                    ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
+                    : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
+                }`}
+              >
+                <Phone size={16} aria-hidden="true" />
+              </a>
+              <a
+                href="https://wa.me/919898740255"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contact us on WhatsApp"
+                className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
+                  darkMode
+                    ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
+                    : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
+                }`}
+              >
+                <MessageCircle size={16} aria-hidden="true" />
+              </a>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Vishwakarma+Fabrication+Works+Bharuch"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View location on Google Maps"
+                className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
+                  darkMode
+                    ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
+                    : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
+                }`}
+              >
+                <MapPin size={16} aria-hidden="true" />
+              </a>
             </div>
           </div>
 
@@ -82,9 +106,10 @@ const Footer = ({ darkMode }: FooterProps) => {
           <div className="lg:col-span-3">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 mb-6">Navigation</p>
             <ul className={`space-y-3 text-sm font-bold ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-              {['Home', 'About', 'Services', 'Contact'].map((item) => (
-                <li key={item}><a href={`#${item.toLowerCase()}`} className="hover:text-blue-500 transition-colors">{item}</a></li>
-              ))}
+              <li><a href="/" className="hover:text-blue-500 transition-colors">Home</a></li>
+              <li><a href="/about" className="hover:text-blue-500 transition-colors">About</a></li>
+              <li><a href="/services" className="hover:text-blue-500 transition-colors">Services</a></li>
+              <li><a href="/contact" className="hover:text-blue-500 transition-colors">Contact</a></li>
             </ul>
           </div>
 

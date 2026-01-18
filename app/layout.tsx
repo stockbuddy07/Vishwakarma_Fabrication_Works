@@ -5,11 +5,19 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  fallback: ['monospace'],
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -20,6 +28,16 @@ export const metadata: Metadata = {
     // Files in the `public` folder are served from the root (`/`), so we omit `/public` here.
     icon: "/images/Vishwakarma_Fabrication_card_logo.jpg",
   },
+  // Resource hints for better performance
+  other: {
+    'dns-prefetch': 'https://images.unsplash.com https://www.google.com https://www.youtube.com',
+  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -28,9 +46,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
