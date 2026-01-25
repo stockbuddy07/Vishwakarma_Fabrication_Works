@@ -1,16 +1,18 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Moon, Sun, Menu, X } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 interface HeaderProps {
-  darkMode: boolean;
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
-  setDarkMode: (dark: boolean) => void;
 }
 
-const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: HeaderProps) => {
+const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
+  const { darkMode, setDarkMode } = useTheme();
   const navItems = [
     { label: 'Home', href: '/' },
     { label: 'About', href: '/about' },
@@ -69,8 +71,8 @@ const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: He
             {/* Actions */}
             <div className="flex items-center gap-4">
               <button 
-                onClick={() => setDarkMode(!darkMode)} 
-                className="p-3 min-w-[44px] min-h-[44px] rounded-full border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center justify-center"
+                onClick={() => setDarkMode(!darkMode)}
+                className={`p-3 min-w-[44px] min-h-[44px] rounded-full border transition-colors flex items-center justify-center ${darkMode ? 'border-gray-600 hover:bg-gray-800' : 'border-gray-300 hover:bg-gray-100'}`}
                 aria-label="Toggle Dark Mode"
               >
                 {darkMode ? <Sun size={20} className="text-yellow-400" aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
@@ -97,7 +99,7 @@ const Header = ({ darkMode, mobileMenuOpen, setMobileMenuOpen, setDarkMode }: He
         </div>
 
         {/* Mobile Sub-Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'max-h-[500px] border-t border-gray-200 dark:border-gray-800' : 'max-h-0'}`}>
+        <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${mobileMenuOpen ? `max-h-[500px] border-t ${darkMode ? 'border-gray-800' : 'border-gray-200'}` : 'max-h-0'}`}>
           <div className={`px-6 pt-4 pb-8 space-y-2 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
             {navItems.map((item) => (
               <Link

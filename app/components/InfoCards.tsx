@@ -1,18 +1,14 @@
+'use client';
+
 import React from 'react';
 import { MapPin, Clock, Users, Star } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
-interface InfoCardsProps {
-  darkMode: boolean;
-}
-
-const InfoCards = ({ darkMode }: InfoCardsProps) => {
+const InfoCards = () => {
+  const { darkMode } = useTheme();
+  
   return (
-    /* FIX: Added 'relative z-10' and a solid background color 
-      to cover any background grid/cross lines from the parent.
-    */
-    <section className={`relative z-10 pt-2 pb-12 px-4 md:px-6 transition-colors duration-300 ${
-      darkMode ? 'bg-gray-950' : 'bg-white'
-    }`}>
+    <section className={`relative z-10 pt-2 pb-12 px-4 md:px-6 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {[
           { icon: <MapPin size={18} />, color: 'text-blue-500', bg: 'bg-blue-500/10', title: 'Bharuch', label: 'Location' },
@@ -22,22 +18,17 @@ const InfoCards = ({ darkMode }: InfoCardsProps) => {
         ].map((card, i) => (
           <div 
             key={i} 
-            className={`p-4 md:p-8 rounded-2xl md:rounded-3xl shadow-sm text-center border transition-all ${
-              darkMode 
-                ? 'bg-gray-900 border-gray-800 text-white' 
-                : 'bg-white border-gray-100 text-gray-900'
-            }`}
+            className={`p-4 md:p-8 rounded-2xl md:rounded-3xl shadow-sm text-center border ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'}`}
           >
-            {/* Icon container with tinted background for better visibility */}
             <div className={`w-10 h-10 md:w-14 md:h-14 mx-auto mb-3 rounded-xl flex items-center justify-center ${card.bg} ${card.color}`}>
               {card.icon}
             </div>
             
-            <h3 className="text-sm md:text-2xl font-bold mb-0.5 whitespace-nowrap">
+            <h3 className={`text-sm md:text-2xl font-bold mb-0.5 whitespace-nowrap ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
               {card.title}
             </h3>
             
-            <p className="text-[10px] md:text-xs opacity-60 uppercase font-bold tracking-tighter md:tracking-widest">
+            <p className={`text-[10px] md:text-xs uppercase font-bold tracking-tighter md:tracking-widest ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               {card.label}
             </p>
           </div>

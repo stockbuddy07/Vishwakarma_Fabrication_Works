@@ -1,33 +1,22 @@
+'use client';
+
 import { Phone, MessageCircle, MapPin } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
-interface FooterProps {
-  darkMode: boolean;
-}
+interface FooterProps {}
 
-const Footer = ({ darkMode }: FooterProps) => {
+const Footer = ({}: FooterProps) => {
+  const { darkMode } = useTheme();
+  
   return (
-    <footer
-      className={`relative overflow-hidden isolate pt-12 pb-8 px-6 transition-all duration-500 ${
-        darkMode 
-          ? 'bg-[#030711] text-white' 
-          : 'bg-white text-gray-900'
-      }`}
-    >
+    <footer className={`relative overflow-hidden isolate pt-12 pb-8 px-6 ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-white text-gray-900'}`}>
       {/* 1. VISUAL SEPARATOR: A distinct top "Glow" or "Shadow" line */}
-      <div className={`absolute top-0 left-0 w-full h-[1px] ${
-        darkMode 
-          ? 'bg-gradient-to-r from-transparent via-blue-500/40 to-transparent' 
-          : 'bg-gray-200'
-      }`} />
+      <div className={`absolute top-0 left-0 w-full h-[1px] ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`} />
 
       {/* 2. DEPTH EFFECT: Subtle background shapes to make it feel "layered" */}
       <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-        <div className={`absolute -top-24 -right-24 w-96 h-96 rounded-full blur-[120px] transition-opacity duration-700 ${
-          darkMode ? 'bg-blue-600/10 opacity-100' : 'bg-blue-100/50 opacity-100'
-        }`} />
-        <div className={`absolute -bottom-24 -left-24 w-72 h-72 rounded-full blur-[100px] transition-opacity duration-700 ${
-          darkMode ? 'bg-purple-600/10 opacity-100' : 'bg-purple-100/30 opacity-100'
-        }`} />
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full blur-[120px] bg-blue-100/50" />
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full blur-[100px] bg-purple-100/30" />
       </div>
 
       <div className="max-w-7xl mx-auto">
@@ -52,10 +41,7 @@ const Footer = ({ darkMode }: FooterProps) => {
               </div>
             </div>
 
-            <p className={`text-sm leading-relaxed max-w-sm ${
-                darkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}
-            >
+            <p className={`text-sm leading-relaxed max-w-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Excellence in metal works since 2005. Providing durable, 
               stylish, and safe fabrication solutions across Bharuch.
             </p>
@@ -65,11 +51,7 @@ const Footer = ({ darkMode }: FooterProps) => {
               <a
                 href="tel:+919898740255"
                 aria-label="Call us"
-                className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
-                  darkMode
-                    ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
-                    : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
-                }`}
+                className="w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white"
               >
                 <Phone size={16} aria-hidden="true" />
               </a>
@@ -78,11 +60,7 @@ const Footer = ({ darkMode }: FooterProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact us on WhatsApp"
-                className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
-                  darkMode
-                    ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
-                    : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
-                }`}
+                className="w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white"
               >
                 <MessageCircle size={16} aria-hidden="true" />
               </a>
@@ -91,11 +69,7 @@ const Footer = ({ darkMode }: FooterProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View location on Google Maps"
-                className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 ${
-                  darkMode
-                    ? 'bg-white/5 border border-white/10 hover:bg-blue-600 text-gray-400 hover:text-white'
-                    : 'bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white'
-                }`}
+                className="w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white"
               >
                 <MapPin size={16} aria-hidden="true" />
               </a>
@@ -105,7 +79,7 @@ const Footer = ({ darkMode }: FooterProps) => {
           {/* 3. STRUCTURE: Compact vertical lists with small headers */}
           <div className="lg:col-span-3">
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 mb-6">Navigation</p>
-            <ul className={`space-y-3 text-sm font-bold ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            <ul className="space-y-3 text-sm font-bold text-gray-500">
               <li><a href="/" className="hover:text-blue-500 transition-colors">Home</a></li>
               <li><a href="/about" className="hover:text-blue-500 transition-colors">About</a></li>
               <li><a href="/services" className="hover:text-blue-500 transition-colors">Services</a></li>
@@ -115,7 +89,7 @@ const Footer = ({ darkMode }: FooterProps) => {
 
           <div className="lg:col-span-3">
   <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 mb-6">Our Services</p>
-  <ul className={`space-y-3 text-sm font-bold ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+  <ul className="space-y-3 text-sm font-bold text-gray-500">
     {['Industrial Fabrication', 'Julo (Swings)', 'Grill & Gate Work', 'Staircase Work', 'Roof Shade'].map((item) => (
   <li key={item}>
     <a 
@@ -131,14 +105,9 @@ const Footer = ({ darkMode }: FooterProps) => {
         </div>
 
         {/* 4. FOOTER NOTE: A distinct "Legal" area with a darker/lighter sub-box */}
-        <div className={`pt-8 mt-8 border-t transition-colors ${
-          darkMode ? 'border-white/5' : 'border-gray-100'
-        }`}>
+        <div className="pt-8 mt-8 border-t border-gray-100">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className={`text-[10px] tracking-widest uppercase font-medium ${
-                darkMode ? 'text-gray-600' : 'text-gray-400'
-              }`}
-            >
+            <p className="text-[10px] tracking-widest uppercase font-medium text-gray-400">
               © 2026 AyushGajjar. All Rights Reserved.
             </p>
             <div className="flex gap-6 text-[10px] uppercase tracking-tighter font-bold text-gray-500">

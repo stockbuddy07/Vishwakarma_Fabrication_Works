@@ -2,49 +2,42 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTheme } from "../context/ThemeContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function GalleryPage() {
-  const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { darkMode } = useTheme();
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
-      }`}
-    >
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       <Header
-        darkMode={darkMode}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
-        setDarkMode={setDarkMode}
       />
 
       <main className="pt-24">
         <section
           id="gallery"
-          className={`py-16 px-6 ${
-            darkMode ? "bg-gray-900" : "bg-white"
-          }`}
+          className={`py-16 px-6 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
         >
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-8">
               <span className="bg-blue-100 text-blue-600 px-5 py-2 rounded-full text-xs font-bold uppercase">
                 Gallery
               </span>
-              <h1 className="text-3xl md:text-5xl font-black mt-6">
+              <h1 className={`text-3xl md:text-5xl font-black mt-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
                 Our Work Showcase
               </h1>
-              <p className="mt-4 text-sm md:text-base opacity-80 max-w-2xl mx-auto">
+              <p className={`mt-4 text-sm md:text-base opacity-80 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                 A glimpse of our fabrication projects including grills, gates,
                 staircases, roof shades and more.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
                 <Image
                   src="/images/factory.jpeg"
                   alt="Industrial Fabrication"
@@ -55,7 +48,7 @@ export default function GalleryPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
                 <Image
                   src="/images/julo.jpeg"
                   alt="Julo (Swing) Work"
@@ -66,7 +59,7 @@ export default function GalleryPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
                 <Image
                   src="/images/gate.jpg"
                   alt="Gate Fabrication"
@@ -77,7 +70,7 @@ export default function GalleryPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
                 <Image
                   src="/images/stairs.jpeg"
                   alt="Staircase Fabrication"
@@ -88,7 +81,7 @@ export default function GalleryPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-lg">
+              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
                 <Image
                   src="/images/shad.jpeg"
                   alt="Roof Shade"
@@ -99,7 +92,7 @@ export default function GalleryPage() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
               </div>
-              <div className="rounded-3xl overflow-hidden shadow-lg flex items-center justify-center bg-gradient-to-tr from-orange-500 to-blue-600 text-white">
+              <div className={`rounded-3xl overflow-hidden shadow-lg flex items-center justify-center ${darkMode ? 'bg-linear-to-tr from-orange-600 to-blue-700' : 'bg-linear-to-tr from-orange-500 to-blue-600'} text-white`}>
                 <div className="text-center px-6 py-10">
                   <p className="text-xs uppercase tracking-[0.25em] font-bold mb-3">
                     More Projects
@@ -118,7 +111,7 @@ export default function GalleryPage() {
         </section>
       </main>
 
-      <Footer darkMode={darkMode} />
+      <Footer />
     </div>
   );
 }

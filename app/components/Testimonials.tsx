@@ -1,11 +1,12 @@
+'use client';
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
-interface TestimonialsProps {
-  darkMode: boolean;
-}
-
-const Testimonials = ({ darkMode }: TestimonialsProps) => {
+const Testimonials = ({}: object) => {
+  const { darkMode } = useTheme();
+  
   const reviews = [
     { name: "Harshil Patel", role: "Local Business Owner", text: "Exceptional quality in steel fabrication. They handled our storefront structure with great precision.", rating: 5 },
     { name: "Devang Kheni", role: "Industrial Engineer", text: "Vishwakarma Fabrication is the go-to place in Bharuch for heavy-duty industrial sheds. Very professional team.", rating: 5 },
@@ -71,7 +72,7 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
   };
 
   return (
-    <section id="testimonials" className={`py-16 px-4 overflow-hidden transition-colors duration-500 ${darkMode ? 'bg-gray-950' : 'bg-gray-50'}`}>
+    <section id="testimonials" className={`py-16 px-4 overflow-hidden ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* Tightened Main Container */}
       <div className="max-w-3xl mx-auto">
         
@@ -79,7 +80,7 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
           <span className="bg-blue-600 text-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.3em] shadow-lg shadow-blue-500/20">
             Client Reviews
           </span>
-          <h2 className={`text-2xl md:text-4xl font-black mt-4 tracking-tighter ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+          <h2 className={`text-2xl md:text-4xl font-black mt-4 tracking-tighter ${darkMode ? 'text-gray-100' : 'text-slate-900'}`}>
             What Our Clients Say
           </h2>
         </div>
@@ -111,9 +112,7 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
           </button>
 
           {/* Optimized Card: Reduced max-width for better vertical flow on all devices */}
-          <div className={`relative mx-auto max-w-2xl rounded-[2rem] p-[2.5px] transition-all duration-500 ${
-              darkMode ? 'shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)]' : 'shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]'
-            }`}>
+          <div className="relative mx-auto max-w-2xl rounded-[2.5rem] p-1 transition-all duration-500 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.1)]">
             
             {/* Professional Rolling Line Trace */}
             {!isPaused && (
@@ -122,14 +121,15 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
                 className="absolute inset-0 w-full h-full z-20 pointer-events-none" 
                 viewBox="0 0 100 100" 
                 preserveAspectRatio="none"
+                style={{ overflow: 'visible' }}
               >
                 <rect
-                  x="0.5" y="0.5"
-                  width="99" height="99"
-                  rx="10"
+                  x="1" y="1"
+                  width="98" height="98"
+                  rx="12"
                   fill="none"
                   stroke="#2563eb"
-                  strokeWidth="0.7"
+                  strokeWidth="0.8"
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
@@ -138,15 +138,15 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
               </svg>
             )}
 
-            <div className={`relative z-10 overflow-hidden rounded-[1.8rem] ${darkMode ? 'bg-slate-900' : 'bg-white'}`}>
+            <div className={`relative z-10 overflow-hidden rounded-[2.35rem] ${darkMode ? 'bg-gray-700' : 'bg-white'}`}>
               <div 
                 className="flex transition-transform duration-1000 cubic-bezier(0.23, 1, 0.32, 1)"
                 style={{ transform: `translateX(-${activeIndex * 100}%)` }}
               >
                 {reviews.map((review, idx) => (
                   <div key={idx} className="min-w-full px-1">
-                    <div className={`p-8 md:p-12 relative min-h-[340px] md:min-h-[400px] flex flex-col justify-center items-center text-center`}>
-                      <Quote className={`absolute top-6 left-6 w-12 h-12 md:w-20 md:h-20 opacity-5 ${darkMode ? 'text-blue-500' : 'text-blue-900'}`} />
+                    <div className={`p-8 md:p-12 relative min-h-85 md:min-h-100 flex flex-col justify-center items-center text-center`}>
+                      <Quote className={`absolute top-6 left-6 w-12 h-12 md:w-20 md:h-20 opacity-5 ${darkMode ? 'text-blue-300' : 'text-blue-900'}`} />
                       
                       <div className="relative z-10 w-full max-w-lg">
                         {/* Compact Rating */}
@@ -163,16 +163,14 @@ const Testimonials = ({ darkMode }: TestimonialsProps) => {
                         </div>
 
                         {/* Sharp Bold Text */}
-                        <p className={`text-base md:text-xl font-black leading-snug mb-6 tracking-tight italic ${
-                          darkMode ? 'text-gray-100' : 'text-slate-800'
-                        }`}>
+                        <p className={`text-base md:text-xl font-black leading-snug mb-6 tracking-tight italic ${darkMode ? 'text-gray-100' : 'text-slate-800'}`}>
                           {review.text}
                         </p>
 
                         <div className="flex flex-col items-center">
-                          <h4 className="text-lg md:text-xl font-black text-blue-600 tracking-tighter uppercase">{review.name}</h4>
-                          <div className="h-0.5 w-8 bg-blue-600 my-3 rounded-full" />
-                          <p className={`text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] opacity-40 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+                          <h4 className={`text-lg md:text-xl font-black tracking-tighter uppercase ${darkMode ? 'text-blue-300' : 'text-blue-600'}`}>{review.name}</h4>
+                          <div className={`h-0.5 w-8 my-3 rounded-full ${darkMode ? 'bg-blue-400' : 'bg-blue-600'}`} />
+                          <p className={`text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] opacity-40 ${darkMode ? 'text-gray-300' : 'text-slate-500'}`}>
                             {review.role}
                           </p>
                         </div>

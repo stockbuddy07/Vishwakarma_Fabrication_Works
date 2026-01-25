@@ -1,8 +1,10 @@
+'use client';
+
 import { Phone, MessageCircle, MapPin, Clock, Star, Hammer } from 'lucide-react';
 import { ReactNode } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 interface ContactProps {
-  darkMode: boolean;
   contactDetails: {
     icon: string | ReactNode;
     label: string;
@@ -21,7 +23,9 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
   Hammer,
 };
 
-const Contact = ({ darkMode, contactDetails }: ContactProps) => {
+const Contact = ({ contactDetails }: ContactProps) => {
+  const { darkMode } = useTheme();
+  
   // Exact Google Maps link for directions to your shop
   const directionUrl = "https://www.google.com/maps/dir//VISHWAKARMA+FABRICATION+WORKS+Shop+No.+10,+GNFC+Rd,+Hari+Krishna+Residency+Bharuch+Gujarat+392015";
   
@@ -35,12 +39,12 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
           <span className="bg-red-50 text-red-500 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest">
             Get In Touch
           </span>
-          <h2 className="text-3xl md:text-4xl font-black mt-4">Contact Us</h2>
+          <h2 className={`text-3xl md:text-4xl font-black mt-4 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Contact Us</h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 items-start">
           <div className="space-y-6">
-            <h3 className="text-xl font-black">Contact Information</h3>
+            <h3 className={`text-xl font-black ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Contact Information</h3>
             <div className="space-y-4">
               {contactDetails.map((item, i) => {
                 const IconComponent = typeof item.icon === 'string' ? iconMap[item.icon] : null;
@@ -51,8 +55,8 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
                     {IconComponent ? <IconComponent size={20} className="scale-90" /> : <div className="scale-90">{item.icon}</div>}
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase opacity-50 tracking-widest">{item.label}</p>
-                    <p className={`text-sm md:text-base font-bold mt-0.5 ${item.color && !darkMode ? item.color : ''}`}>
+                    <p className={`text-[10px] font-bold uppercase opacity-50 tracking-widest ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{item.label}</p>
+                    <p className={`text-sm md:text-base font-bold mt-0.5 ${item.color ? item.color : ''} ${darkMode && !item.color ? 'text-gray-100' : ''}`}>
                       {item.value}
                     </p>
                   </div>
@@ -85,14 +89,14 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
           </div>
 
           <div>
-            <h3 className="text-xl font-black mb-6">Visit Our Workshop</h3>
-            <div className={`rounded-3xl overflow-hidden border shadow-xl transition-all ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-100'}`}>
-              <div className="h-56 md:h-64 bg-gray-200">
+            <h3 className={`text-xl font-black mb-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Visit Our Workshop</h3>
+            <div className={`rounded-3xl overflow-hidden border shadow-xl ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-100'}`}>
+              <div className={`h-56 md:h-64 ${darkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                 {/* Updated iFrame for Vishwakarma Fabrication Works */}
                 <iframe 
                   title="Vishwakarma Fabrication Works" 
                   src={mapEmbedUrl} 
-                  className={`w-full h-full border-0 ${darkMode ? 'invert hue-rotate-180 opacity-80' : ''}`} 
+                  className="w-full h-full border-0" 
                   allowFullScreen={true} 
                   loading="lazy"
                 />
@@ -107,14 +111,14 @@ const Contact = ({ darkMode, contactDetails }: ContactProps) => {
                     <div className="bg-blue-100 text-blue-600 p-2 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors">
                       <MapPin size={20}/>
                     </div>
-                    <span className="font-black text-lg group-hover:text-blue-600 transition-colors">Vishwakarma Fabrication Works</span>
+                    <span className={`font-black text-lg group-hover:text-blue-600 transition-colors ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Vishwakarma Fabrication Works</span>
                  </a>
                  
-                 <p className="text-sm opacity-70 leading-relaxed mb-5">
+                 <p className={`text-sm opacity-70 leading-relaxed mb-5 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                    Located in Tulshidham area near the vegetables market, our workshop is easily accessible and equipped with modern fabrication facilities.
                  </p>
 
-                 <div className="flex flex-wrap gap-4 text-[10px] font-black uppercase tracking-widest">
+                 <div className={`flex flex-wrap gap-4 text-[10px] font-black uppercase tracking-widest ${darkMode ? 'text-gray-300' : 'text-gray-900'}`}>
                     <span className="text-green-500 flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"/> 
                       Open Daily (9 AM - 9 PM)

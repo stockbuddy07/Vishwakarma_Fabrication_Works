@@ -1,32 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 import { Phone, MessageCircle } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
-interface HeroProps {
-  darkMode: boolean;
-}
+interface HeroProps {}
 
-const Hero = ({ darkMode }: HeroProps) => {
+const Hero = ({}: HeroProps) => {
+  const { darkMode } = useTheme();
   return (
     <section 
       id="home" 
-      // CHANGED: Removed min-h-screen and added pb-12/md:pb-20 for a controlled bottom gap
-      className={`relative w-full flex flex-col items-center pt-24 pb-12 md:pb-20 overflow-hidden transition-colors duration-300 ${
-        darkMode ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'
-      }`}
+      className={`relative w-full flex flex-col items-center pt-24 pb-12 md:pb-20 overflow-hidden ${darkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}
     >
       {/* Background Blurs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] bg-orange-400 ${darkMode ? 'opacity-10' : 'opacity-20'}`}></div>
-        <div className={`absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] bg-blue-400 ${darkMode ? 'opacity-10' : 'opacity-20'}`}></div>
+        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] bg-orange-400 opacity-20"></div>
+        <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] rounded-full blur-[120px] bg-blue-400 opacity-20"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 flex flex-col items-center">
         
         {/* IMAGE CONTAINER - mt-0 because parent now has pt-24 */}
         <div className="inline-block mx-auto">
-          <div className={`relative rounded-2xl overflow-hidden shadow-2xl border-4 transition-colors duration-300 ${
-            darkMode ? 'border-gray-800 bg-gray-900' : 'border-white bg-gray-50'
-          }`}>
+          <div className={`relative rounded-2xl overflow-hidden shadow-2xl border-4 ${darkMode ? 'border-gray-700 bg-gray-700' : 'border-white bg-gray-50'}`}>
             <Image 
               src="/images/Vishwakarma_Fabrication_card.jpg" 
               alt="Vishwakarma Fabrication Works"
@@ -42,19 +39,15 @@ const Hero = ({ darkMode }: HeroProps) => {
 
         {/* TEXT CONTENT */}
         <div className="mt-8 text-center flex flex-col items-center w-full">
-          <div className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold mb-4 border transition-colors ${
-            darkMode 
-              ? 'bg-blue-900/20 text-blue-400 border-blue-800' 
-              : 'bg-blue-50 text-blue-600 border-blue-100'
-          }`}>
+          <div className="inline-flex items-center px-3 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold mb-4 border bg-blue-50 text-blue-600 border-blue-100">
             Bharuch, Gujarat • 9AM - 9PM
           </div>
 
-          <h1 className="text-3xl md:text-6xl font-black mb-3 tracking-tighter leading-tight uppercase">
+          <h1 className={`text-3xl md:text-6xl font-black mb-3 tracking-tighter leading-tight uppercase ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
             Vishwakarma <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-500">Fabrication</span> Works
           </h1>
 
-          <p className={`text-sm md:text-base mb-8 max-w-2xl transition-opacity ${darkMode ? 'opacity-60' : 'opacity-80'}`}>
+          <p className={`text-sm md:text-base mb-8 max-w-2xl opacity-80 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             Specialists in Industrial & Non-Industrial Grills, Gates, Staircases, and Roof Shades.
           </p>
 

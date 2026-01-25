@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from "react";
+import { useTheme } from "../context/ThemeContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Contact from "../components/Contact";
 
 export default function ContactPage() {
-  const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { darkMode } = useTheme();
 
   const contactDetails = [
     { icon: "Phone", label: "Phone", value: "+91 98987 40255", color: "text-blue-600" },
@@ -33,23 +34,17 @@ export default function ContactPage() {
   ];
 
   return (
-    <div
-      className={`min-h-screen transition-colors duration-300 ${
-        darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
-      }`}
-    >
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
       <Header
-        darkMode={darkMode}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
-        setDarkMode={setDarkMode}
       />
 
       <main className="pt-24">
-        <Contact darkMode={darkMode} contactDetails={contactDetails} />
+        <Contact contactDetails={contactDetails} />
       </main>
 
-      <Footer darkMode={darkMode} />
+      <Footer />
     </div>
   );
 }

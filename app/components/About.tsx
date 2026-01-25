@@ -1,11 +1,14 @@
+'use client';
+
 import Image from 'next/image';
 import { CheckCircle2, Clock, ShieldCheck, MapPin } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
-interface AboutProps {
-  darkMode: boolean;
-}
+interface AboutProps {}
 
-const About = ({ darkMode }: AboutProps) => {
+const About = ({}: AboutProps) => {
+  const { darkMode } = useTheme();
+  
   // Function to handle map opening
   const openMap = () => {
     const address = "Vishwakarma Fabrication Works, Shop No.10, Harikrishna Residency, Zadeshwar Road, Bharuch";
@@ -18,13 +21,13 @@ const About = ({ darkMode }: AboutProps) => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="bg-blue-100 text-blue-600 px-5 py-2 rounded-full text-xs font-bold uppercase">About Us</span>
-          <h2 className="text-3xl md:text-5xl font-black mt-6">Vishwakarma Fabrication Works</h2>
-          <p className="text-blue-600 font-bold mt-2 uppercase">Industrial & Non-Industrial Works</p>
+          <h2 className={`text-3xl md:text-5xl font-black mt-6 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Vishwakarma Fabrication Works</h2>
+          <p className={`font-bold mt-2 uppercase ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>Industrial & Non-Industrial Works</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            <p className="text-lg opacity-80 leading-relaxed">
+            <p className={`text-lg opacity-80 leading-relaxed ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
               We specialize in comprehensive fabrication services including Grill, Gate, Staircase, and Roof Shade solutions.
             </p>
 
@@ -35,10 +38,10 @@ const About = ({ darkMode }: AboutProps) => {
                 { icon: <ShieldCheck size={20} className="text-blue-500" />, title: "Expert Team", desc: "Skilled specialists" },
                 { icon: <MapPin size={20} className="text-blue-500" />, title: "Local Service", desc: "Serving Bharuch & nearby areas" }
               ].map((item, i) => (
-                <div key={i} className={`p-4 rounded-xl ${darkMode ? 'bg-gray-900' : 'bg-blue-50'}`}>
+                <div key={i} className={`p-4 rounded-xl ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
                   {item.icon}
-                  <h4 className="font-bold text-sm mt-2">{item.title}</h4>
-                  <p className="text-xs opacity-60">{item.desc}</p>
+                  <h4 className={`font-bold text-sm mt-2 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>{item.title}</h4>
+                  <p className={`text-xs opacity-60 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -62,7 +65,7 @@ const About = ({ darkMode }: AboutProps) => {
           <div className="max-w-7xl mx-auto p-4">
             {/* Header Section */}
             <div className="flex justify-between items-end mb-6 px-2">
-              <h3 className={`text-4xl font-black tracking-tight ${darkMode ? 'text-white' : 'text-gray-900'}`}>Gallery</h3>
+              <h3 className={`text-4xl font-black tracking-tight ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>Gallery</h3>
             </div>
 
             {/* Bento Grid Layout - Height reduced to 450px for smaller images */}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from 'next/dynamic';
+import { useTheme } from './context/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
@@ -25,8 +26,8 @@ const Contact = dynamic(() => import('./components/Contact'), {
 });
 
 export default function VishwakarmaCompleteWebsite() {
-  const [darkMode, setDarkMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { darkMode } = useTheme();
 
   // Contact details - keep simple structure, icons loaded in component
   const contactDetails = [
@@ -39,20 +40,20 @@ export default function VishwakarmaCompleteWebsite() {
   ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
-      <Header darkMode={darkMode} mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} setDarkMode={setDarkMode} />
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
+      <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
       
       <main id="main-content">
-        <Hero darkMode={darkMode} />
-        <InfoCards darkMode={darkMode} />
-        <About darkMode={darkMode} />
-        <Services darkMode={darkMode} />
-        <WorkingHours darkMode={darkMode} />
-        <Testimonials darkMode={darkMode} />
-        <Contact darkMode={darkMode} contactDetails={contactDetails} />
+        <Hero />
+        <InfoCards />
+        <About />
+        <Services />
+        <WorkingHours />
+        <Testimonials />
+        <Contact contactDetails={contactDetails} />
       </main>
 
-      <Footer darkMode={darkMode} />
+      <Footer />
     </div>
   );
 }
