@@ -5,6 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import About from "../components/About";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function AboutPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,6 +23,7 @@ export default function AboutPage() {
       </main>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }

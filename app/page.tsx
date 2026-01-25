@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
 import InfoCards from './components/InfoCards';
+import { Analytics } from "@vercel/analytics/next";
 
 // Dynamic imports for below-the-fold components to reduce initial bundle size
 const About = dynamic(() => import('./components/About'), {
@@ -54,6 +55,7 @@ export default function VishwakarmaCompleteWebsite() {
       </main>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }

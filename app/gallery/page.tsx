@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTheme } from "../context/ThemeContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function GalleryPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -107,6 +108,7 @@ export default function GalleryPage() {
       </main>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }

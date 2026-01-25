@@ -5,6 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Contact from "../components/Contact";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function ContactPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,6 +46,7 @@ export default function ContactPage() {
       </main>
 
       <Footer />
+      <Analytics />
     </div>
   );
 }
