@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Phone, MessageCircle, MapPin } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -25,13 +26,21 @@ const Footer = ({}: FooterProps) => {
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-6 space-y-5">
             <div className="flex items-center gap-3">
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shadow-xl shrink-0 scale-90 md:scale-100"
-                style={{
-                  background: 'linear-gradient(135deg, #FF8C42 0%, #9D5EBF 50%, #5B7FE8 100%)',
-                }}
-              >
-                <span className="text-white font-black text-lg">V</span>
+              <div className="relative group">
+                {/* Enhanced Glow Effect */}
+                <div className="absolute -inset-2 bg-orange-800 rounded-full blur-md opacity-20 group-hover:opacity-60 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+
+                {/* Logo Container */}
+                <div className="relative w-10 h-10 flex items-center justify-center">
+                  <Image
+                    src="/images/Vishwakarma_Fabrication_card_logo.jpg"
+                    alt="Vishwakarma Fabrication Logo"
+                    className="w-full h-full object-contain"
+                    width={40}
+                    height={40}
+                    priority
+                  />
+                </div>
               </div>
               <div>
                 <h2 className="font-black text-lg tracking-tight uppercase">
@@ -46,32 +55,35 @@ const Footer = ({}: FooterProps) => {
               stylish, and safe fabrication solutions across Bharuch.
             </p>
 
-            {/* Social Icons with "Glass" effect */}
+            {/* Social Icons - Modern Square Buttons with Cool Effects */}
             <div className="flex gap-3">
               <a
                 href="tel:+919898740255"
                 aria-label="Call us"
-                className="w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white"
+                className="group relative w-11 h-11 flex items-center justify-center transition-all duration-300 hover:scale-110 bg-gradient-to-br from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white shadow-lg hover:shadow-blue-500/50 rounded-lg overflow-hidden"
               >
-                <Phone size={16} aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-300 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Phone size={16} className="relative z-10 transition-transform group-hover:scale-110" aria-hidden="true" />
               </a>
               <a
                 href="https://wa.me/919898740255"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contact us on WhatsApp"
-                className="w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white"
+                className="group relative w-11 h-11 flex items-center justify-center transition-all duration-300 hover:scale-110 bg-gradient-to-br from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white shadow-lg hover:shadow-green-500/50 rounded-lg overflow-hidden"
               >
-                <MessageCircle size={16} aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-br from-green-300 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <MessageCircle size={16} className="relative z-10 transition-transform group-hover:scale-110" aria-hidden="true" />
               </a>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Vishwakarma+Fabrication+Works+Bharuch"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View location on Google Maps"
-                className="w-11 h-11 rounded-lg flex items-center justify-center transition-all hover:-translate-y-1 bg-gray-100 border border-gray-200 hover:bg-blue-600 text-gray-600 hover:text-white"
+                className="group relative w-11 h-11 flex items-center justify-center transition-all duration-300 hover:scale-110 bg-gradient-to-br from-red-400 to-red-600 hover:from-red-500 hover:to-red-700 text-white shadow-lg hover:shadow-red-500/50 rounded-lg overflow-hidden"
               >
-                <MapPin size={16} aria-hidden="true" />
+                <div className="absolute inset-0 bg-gradient-to-br from-red-300 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <MapPin size={16} className="relative z-10 transition-transform group-hover:scale-110" aria-hidden="true" />
               </a>
             </div>
           </div>

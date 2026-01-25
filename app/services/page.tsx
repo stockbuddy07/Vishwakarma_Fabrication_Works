@@ -1,4 +1,4 @@
-'use client';
+  'use client';
 
 import { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
@@ -20,6 +20,8 @@ export default function ServicesPage() {
 
       <main className="pt-24">
         <Services />
+
+      
       </main>
 
       <Footer />

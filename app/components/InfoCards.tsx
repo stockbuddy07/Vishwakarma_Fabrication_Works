@@ -8,7 +8,7 @@ const InfoCards = () => {
   const { darkMode } = useTheme();
   
   return (
-    <section className={`relative z-10 pt-2 pb-12 px-4 md:px-6 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+    <section className={`relative z-10 pt-12 pb-12 px-4 md:px-6 ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {[
           { icon: <MapPin size={18} />, color: 'text-blue-500', bg: 'bg-blue-500/10', title: 'Bharuch', label: 'Location' },

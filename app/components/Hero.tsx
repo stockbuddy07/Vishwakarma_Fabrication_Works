@@ -27,17 +27,17 @@ const Hero = ({}: HeroProps) => {
             <Image
               src="/images/Vishwakarma_Fabrication_card.jpg"
               alt="Vishwakarma Fabrication Works"
-              width={600}
-              height={300}
+              width={650}
+              height={350}
               priority
               quality={85}
-              className="max-w-full max-h-[40vh] md:max-h-[45vh] w-auto h-auto block object-contain"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 600px"
+              className="max-w-full max-h-[45vh] md:max-h-[40vh] lg:max-h-[35vh] w-auto h-auto block object-contain"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 700px"
             />
             <a
               href="/images/Vishwakarma_Fabrication_card.jpg"
               download
-              className={`absolute top-13 right-2 rounded-full p-2 transition-opacity hover:bg-opacity-100 ${darkMode ? 'bg-gray-600 bg-opacity-80 text-gray-100' : 'bg-white bg-opacity-20 text-gray-800'}`}
+              className={`absolute top-11 right-2 rounded-full p-2 transition-opacity hover:bg-opacity-100 ${darkMode ? 'bg-gray-600 bg-opacity-80 text-gray-100' : 'bg-white bg-opacity-20 text-gray-800'}`}
               aria-label="Download card image"
             >
               <Download size={25} />
