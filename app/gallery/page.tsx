@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "../context/ThemeContext";
 import Header from "../components/Header";
@@ -9,6 +9,23 @@ import Footer from "../components/Footer";
 export default function GalleryPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { darkMode } = useTheme();
+  const [images, setImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetch('/api/images')
+      .then(res => res.json())
+      .then(data => setImages(data))
+      .catch(err => console.error('Failed to fetch images:', err));
+  }, []);
+
+  const downloadImage = (imageUrl: string) => {
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = imageUrl.split('/').pop() || 'image';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50 text-gray-900'}`}>
@@ -37,61 +54,39 @@ export default function GalleryPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
-                <Image
-                  src="/images/factory.jpeg"
-                  alt="Industrial Fabrication"
-                  width={400}
-                  height={224}
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
-                <Image
-                  src="/images/julo.jpeg"
-                  alt="Julo (Swing) Work"
-                  width={400}
-                  height={224}
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
-                <Image
-                  src="/images/gate.jpg"
-                  alt="Gate Fabrication"
-                  width={400}
-                  height={224}
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
-                <Image
-                  src="/images/stairs.jpeg"
-                  alt="Staircase Fabrication"
-                  width={400}
-                  height={224}
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className={`rounded-3xl overflow-hidden shadow-lg ${darkMode ? 'bg-gray-700' : ''}`}>
-                <Image
-                  src="/images/shad.jpeg"
-                  alt="Roof Shade"
-                  width={400}
-                  height={224}
-                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
+              {images.map((image, index) => (
+                <div key={index} className={`rounded-3xl overflow-hidden shadow-lg relative ${darkMode ? 'bg-gray-700' : ''}`}>
+                  <Image
+                    src={image}
+                    alt={image.split('/').pop()?.split('.')[0] || 'Gallery Image'}
+                    width={400}
+                    height={224}
+                    className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <button
+                    onClick={() => downloadImage(image)}
+                    className="absolute top-2 right-2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200"
+                    title="Download Image"
+                  >
+                    <svg
+                      className="w-4 h-4 text-gray-700"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ))}
               <div className={`rounded-3xl overflow-hidden shadow-lg flex items-center justify-center ${darkMode ? 'bg-linear-to-tr from-orange-600 to-blue-700' : 'bg-linear-to-tr from-orange-500 to-blue-600'} text-white`}>
                 <div className="text-center px-6 py-10">
                   <p className="text-xs uppercase tracking-[0.25em] font-bold mb-3">
