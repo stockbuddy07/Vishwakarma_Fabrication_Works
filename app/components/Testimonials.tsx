@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import QRCode from 'react-qr-code';
 
 const Testimonials = ({}: object) => {
   const { darkMode } = useTheme();
@@ -192,14 +193,75 @@ const Testimonials = ({}: object) => {
                 aria-selected={i === activeIndex}
                 role="tab"
                 className={`transition-all duration-500 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center ${
-                  i === activeIndex 
-                    ? 'bg-blue-600 w-8 md:w-10 shadow-lg shadow-blue-500/50' 
+                  i === activeIndex
+                    ? 'bg-blue-600 w-8 md:w-10 shadow-lg shadow-blue-500/50'
                     : 'bg-slate-300 w-1.5'
                 }`}
               >
                 <span className="sr-only">Testimonial {i + 1}</span>
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Leave Your Review Section */}
+        <div className="mt-12 text-center animate-fade-in-up">
+          <div className={`max-w-md mx-auto p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden group ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+            {/* Animated Background Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-gradient-x"></div>
+
+            {/* Floating Particles Effect */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full opacity-20 animate-float-1"></div>
+              <div className="absolute top-8 right-6 w-1 h-1 bg-purple-400 rounded-full opacity-30 animate-float-2"></div>
+              <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-blue-300 rounded-full opacity-25 animate-float-3"></div>
+            </div>
+
+            <div className="relative z-10">
+              <h3 className={`text-xl font-black mb-4 animate-slide-in-left ${darkMode ? 'text-gray-100' : 'text-slate-900'}`}>
+                Share Your Experience
+              </h3>
+              <p className={`text-sm mb-6 animate-slide-in-right delay-200 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Your feedback helps us improve and helps other customers make informed decisions.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                {/* QR Code with Enhanced Animations */}
+                <div className={`p-4 rounded-xl hover:scale-110 transition-all duration-300 hover:rotate-3 group/qr ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-50 hover:bg-gray-100'} shadow-md hover:shadow-lg`}>
+                  <div className="relative">
+                    <QRCode
+                      value="https://g.page/r/CVbqMqdWQ_DUEAE/review"
+                      size={80}
+                      style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                      viewBox={`0 0 256 256`}
+                      className="animate-pulse-slow"
+                    />
+                    {/* QR Code Glow Effect */}
+                    <div className="absolute inset-0 rounded-lg bg-blue-500/20 opacity-0 group-hover/qr:opacity-100 transition-opacity duration-300 blur-xl"></div>
+                  </div>
+                  <p className={`text-xs mt-3 font-semibold animate-bounce-in delay-300 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    📱 Scan to Review
+                  </p>
+                </div>
+
+                {/* Enhanced Button with Multiple Effects */}
+                <a
+                  href="https://g.page/r/CVbqMqdWQ_DUEAE/review"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/btn relative inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-500/50 transform hover:scale-105 hover:-translate-y-1 overflow-hidden"
+                >
+                  {/* Button Background Animation */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+
+                  {/* Button Shine Effect */}
+                  <div className="absolute inset-0 -top-1 -left-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 group-hover/btn:animate-shine transition-opacity duration-300"></div>
+
+                  <span className="relative z-10 animate-pulse-slow">Leave a Review</span>
+                  <ExternalLink size={18} className="relative z-10 group-hover/btn:rotate-12 transition-transform duration-300" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

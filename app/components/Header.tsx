@@ -23,7 +23,7 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
 
   return (
     <>
-      <header className={`fixed w-full z-50 shadow-sm transition-colors ${darkMode ? 'bg-gray-900/95 text-white' : 'bg-white/95 text-gray-900'} backdrop-blur-md`}>
+<header className={`fixed w-full z-50 shadow-lg transition-colors ${darkMode ? 'bg-gray-900/95 text-white border-gray-700/20' : 'bg-white/95 text-gray-900 border-white/20'} backdrop-blur-lg`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-[80px]"> {/* Slightly taller header for bigger logo */}
             {/* Logo Section */}
