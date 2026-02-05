@@ -162,18 +162,16 @@ export async function GET(request: Request) {
     // Fallback: try to return local images from public/images if Cloudinary fails
     try {
       console.log('Falling back to local images...');
-      const fs = require('fs');
-      const path = require('path');
       const imagesDir = path.join(process.cwd(), 'public', 'images');
 
       if (fs.existsSync(imagesDir)) {
-        const imageFiles = fs.readdirSync(imagesDir).filter(file => {
+        const imageFiles = fs.readdirSync(imagesDir).filter((file: string) => {
           const ext = path.extname(file).toLowerCase();
           return ['.jpg', '.jpeg', '.png', '.webp', '.gif'].includes(ext);
         });
 
         if (imageFiles.length > 0) {
-          const images = imageFiles.map(file => `/images/${file}`);
+          const images = imageFiles.map((file: string) => `/images/${file}`);
           console.log('Returning local images:', images.length);
           return NextResponse.json(images, {
             headers: {
