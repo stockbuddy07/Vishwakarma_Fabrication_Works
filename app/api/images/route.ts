@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
+import path from 'path';
 
 interface CloudinaryResource {
   secure_url: string;
@@ -61,12 +63,29 @@ function getClientIP(request: Request): string {
 }
 
 function getCloudinaryConfig() {
-  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-  const apiKey = process.env.CLOUDINARY_API_KEY;
-  const apiSecret = process.env.CLOUDINARY_API_SECRET;
+  // Try environment variables first
+  let cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  let apiKey = process.env.CLOUDINARY_API_KEY;
+  let apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+  // Temporary hardcoded fallback for testing (REMOVE AFTER TESTING)
+  if (!cloudName || !apiKey || !apiSecret) {
+    console.log('Using hardcoded Cloudinary config for testing...');
+    cloudName = 'dr2hsb20k'; // Replace with your actual cloud name
+    apiKey = '469622129812196'; // Replace with your actual API key
+    apiSecret = 'GW8_exLjW1WCGaKPUtdk9q33tWU'; // Replace with your actual API secret
+  }
+
+  console.log('Cloudinary config check:', {
+    hasCloudName: !!cloudName,
+    hasApiKey: !!apiKey,
+    hasApiSecret: !!apiSecret,
+    cloudName: cloudName ? cloudName.substring(0, 5) + '...' : 'undefined',
+    usingEnvVars: !!(process.env.CLOUDINARY_CLOUD_NAME)
+  });
 
   if (!cloudName || !apiKey || !apiSecret) {
-    console.error('Cloudinary configuration missing. Please check your environment variables.');
+    console.error('Cloudinary configuration missing.');
     throw new Error('Cloudinary configuration missing');
   }
 
@@ -139,6 +158,37 @@ export async function GET(request: Request) {
 
   } catch (error) {
     console.error('Cloudinary API error:', error);
+
+    // Fallback: try to return local images from public/images if Cloudinary fails
+    try {
+      console.log('Falling back to local images...');
+      const fs = require('fs');
+      const path = require('path');
+      const imagesDir = path.join(process.cwd(), 'public', 'images');
+
+      if (fs.existsSync(imagesDir)) {
+        const imageFiles = fs.readdirSync(imagesDir).filter(file => {
+          const ext = path.extname(file).toLowerCase();
+          return ['.jpg', '.jpeg', '.png', '.webp', '.gif'].includes(ext);
+        });
+
+        if (imageFiles.length > 0) {
+          const images = imageFiles.map(file => `/images/${file}`);
+          console.log('Returning local images:', images.length);
+          return NextResponse.json(images, {
+            headers: {
+              'Cache-Control': 'public, max-age=300',
+              'X-Content-Type-Options': 'nosniff',
+              'X-Frame-Options': 'DENY',
+              'X-XSS-Protection': '1; mode=block',
+              'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+            }
+          });
+        }
+      }
+    } catch (fallbackError) {
+      console.error('Fallback also failed:', fallbackError);
+    }
 
     // Don't expose internal error details
     const isTimeout = error instanceof Error && error.message === 'Request timeout';
