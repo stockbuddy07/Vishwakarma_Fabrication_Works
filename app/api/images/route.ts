@@ -63,29 +63,19 @@ function getClientIP(request: Request): string {
 }
 
 function getCloudinaryConfig() {
-  // Try environment variables first
-  let cloudName = process.env.CLOUDINARY_CLOUD_NAME;
-  let apiKey = process.env.CLOUDINARY_API_KEY;
-  let apiSecret = process.env.CLOUDINARY_API_SECRET;
-
-  // Temporary hardcoded fallback for testing (REMOVE AFTER TESTING)
-  if (!cloudName || !apiKey || !apiSecret) {
-    console.log('Using hardcoded Cloudinary config for testing...');
-    cloudName = 'dr2hsb20k'; // Replace with your actual cloud name
-    apiKey = '469622129812196'; // Replace with your actual API key
-    apiSecret = 'GW8_exLjW1WCGaKPUtdk9q33tWU'; // Replace with your actual API secret
-  }
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
   console.log('Cloudinary config check:', {
     hasCloudName: !!cloudName,
     hasApiKey: !!apiKey,
     hasApiSecret: !!apiSecret,
-    cloudName: cloudName ? cloudName.substring(0, 5) + '...' : 'undefined',
-    usingEnvVars: !!(process.env.CLOUDINARY_CLOUD_NAME)
+    cloudName: cloudName ? cloudName.substring(0, 5) + '...' : 'undefined'
   });
 
   if (!cloudName || !apiKey || !apiSecret) {
-    console.error('Cloudinary configuration missing.');
+    console.error('Cloudinary configuration missing. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET environment variables.');
     throw new Error('Cloudinary configuration missing');
   }
 

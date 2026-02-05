@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# API routes (for security - uncomment if needed)
+# app/api/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
