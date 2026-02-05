@@ -11,12 +11,32 @@ export default function GalleryPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { darkMode } = useTheme();
   const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/images')
-      .then(res => res.json())
-      .then(data => setImages(data))
-      .catch(err => console.error('Failed to fetch images:', err));
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) {
+          setImages(data);
+        } else if (data.error) {
+          throw new Error(data.error);
+        } else {
+          throw new Error('Invalid response format');
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch images:', err);
+        setError('Failed to load gallery images. Please try again later.');
+        setLoading(false);
+      });
   }, []);
 
   const downloadImage = (imageUrl: string) => {
@@ -55,7 +75,37 @@ export default function GalleryPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {images.map((image, index) => (
+              {loading && (
+                <div className="col-span-full flex justify-center items-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
+              )}
+
+              {error && (
+                <div className="col-span-full text-center py-12">
+                  <div className={`p-6 rounded-lg ${darkMode ? 'bg-red-900 text-red-200' : 'bg-red-50 text-red-800'}`}>
+                    <p className="text-lg font-semibold mb-2">Unable to Load Gallery</p>
+                    <p>{error}</p>
+                    <button
+                      onClick={() => window.location.reload()}
+                      className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                    >
+                      Try Again
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {!loading && !error && images.length === 0 && (
+                <div className="col-span-full text-center py-12">
+                  <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800 text-gray-200' : 'bg-gray-50 text-gray-800'}`}>
+                    <p className="text-lg font-semibold mb-2">No Images Found</p>
+                    <p>Please check back later or contact us for our latest work.</p>
+                  </div>
+                </div>
+              )}
+
+              {!loading && !error && images.map((image, index) => (
                 <div key={index} className={`rounded-3xl overflow-hidden shadow-lg relative ${darkMode ? 'bg-gray-700' : ''}`}>
                   <Image
                     src={image}
@@ -88,20 +138,23 @@ export default function GalleryPage() {
                   </button>
                 </div>
               ))}
-              <div className={`rounded-3xl overflow-hidden shadow-lg flex items-center justify-center ${darkMode ? 'bg-linear-to-tr from-orange-600 to-blue-700' : 'bg-linear-to-tr from-orange-500 to-blue-600'} text-white`}>
-                <div className="text-center px-6 py-10">
-                  <p className="text-xs uppercase tracking-[0.25em] font-bold mb-3">
-                    More Projects
-                  </p>
-                  <p className="text-base md:text-lg font-semibold mb-4">
-                    Visit our workshop to see more live fabrication work in
-                    progress.
-                  </p>
-                  <p className="text-xs opacity-80">
-                    Tulshidham, Zadeshwar Road, Bharuch, Gujarat
-                  </p>
+
+              {!loading && !error && images.length > 0 && (
+                <div className={`rounded-3xl overflow-hidden shadow-lg flex items-center justify-center ${darkMode ? 'bg-gradient-to-tr from-orange-600 to-blue-700' : 'bg-gradient-to-tr from-orange-500 to-blue-600'} text-white`}>
+                  <div className="text-center px-6 py-10">
+                    <p className="text-xs uppercase tracking-[0.25em] font-bold mb-3">
+                      More Projects
+                    </p>
+                    <p className="text-base md:text-lg font-semibold mb-4">
+                      Visit our workshop to see more live fabrication work in
+                      progress.
+                    </p>
+                    <p className="text-xs opacity-80">
+                      Tulshidham, Zadeshwar Road, Bharuch, Gujarat
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>

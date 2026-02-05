@@ -66,11 +66,13 @@ function getCloudinaryConfig() {
   const apiSecret = process.env.CLOUDINARY_API_SECRET;
 
   if (!cloudName || !apiKey || !apiSecret) {
+    console.error('Cloudinary configuration missing. Please check your environment variables.');
     throw new Error('Cloudinary configuration missing');
   }
 
   // Validate format (basic check)
   if (!/^[a-zA-Z0-9_-]+$/.test(cloudName)) {
+    console.error('Invalid cloud name format:', cloudName);
     throw new Error('Invalid cloud name format');
   }
 
