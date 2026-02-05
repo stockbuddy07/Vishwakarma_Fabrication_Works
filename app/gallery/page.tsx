@@ -115,6 +115,7 @@ export default function GalleryPage() {
                     className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    unoptimized
                   />
                   <button
                     onClick={() => downloadImage(image)}
